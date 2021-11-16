@@ -26,19 +26,19 @@ class BooksController < ApplicationController
 
   def update
     book = Book.find(params[:id])
-    @book.update(book_params)
+    book.update(book_params)
     redirect_to book_path(book.id)
   end
 
   def destroy
-    book = Book.find(params[:id])  # データ（レコード）を1件取得
-    book.destroy  # データ（レコード）を削除
-    redirect_to books_path  # 投稿一覧画面へリダイレクト
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   private
   def book_params
-    params.permit(:title, :body)
+    params.require(:book).permit(:title, :body)
   end
 
 end
